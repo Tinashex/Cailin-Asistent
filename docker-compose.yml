@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  cailin-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cailin-assistant
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CLOUDFLARED_TOKEN=${CLOUDFLARED_TOKEN:-}
+    volumes:
+      - ./session:/app/session
+      - ./tmp:/app/tmp
