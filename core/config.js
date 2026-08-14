@@ -1,27 +1,26 @@
 /**
-
-   * WhatsApp bot Cailin Assistant using baileys (@wishkeysocket/baileys)
-   * Type plugins  | Modules ESM
-   * Creator Mommy kyu
+   * WhatsApp bot WatsonX-Bot using baileys (@whiskeysockets/baileys)
+   * Type: plugins | Modules: ESM
+   * Creator: Mommy Kyu
    * Follow https://whatsapp.com/channel/0029Vb7gcbuLdQelWzrTzD3D
    * Follow https://whatsapp.com/channel/0029VbCsmdMC1Fu6NbIaaY2T
-   
-   ** Dilarang menjual   script ini.*
-   
-   ** [ID] - Baca file README.md untuk melihat panduan!
-   ** [ENG] -  Read the README.md file to see the guide!
-   
-   ** Copyright (©) Mommy kyu 2026 **
-   
+
+   ** Not allowed to sell this script.
+
+   ** [ID] - Read README.md file for guide!
+   ** [ENG] - Read README.md file for guide!
+
+   ** Copyright (©) Mommy Kyu 2026 **
+
 **/
 
 import fs from 'fs';
 
-global.owner = ['62*****'];
-global.botNumber = '62****';
-global.botname = 'Cailin Assistant';
+global.owner = ['263781330745'];
+global.botNumber = '263781330745';
+global.botname = 'WatsonX-Bot';
 global.author = '@mommykyuu';
-global.version = '2.0.0';
+global.version = '2.0.1';
 global.body = 'Simple WhatsApp Bot.';
 global.vidmenu = './media/menu.mp4';
 global.banner1 = './media/menu.jpg';
@@ -35,6 +34,7 @@ global.newsletterName = 'Kyu Multi Device';
 global.kyzzKey = 'ambil_sendiri';
 global.termaiKey = 'ambil_sendiri';
 global.defaultLimit = 20;
+
 let configOverrides = {};
 if (fs.existsSync('./data/config_overrides.json')) {
   try {
@@ -45,13 +45,10 @@ if (fs.existsSync('./data/config_overrides.json')) {
 global.pairingCode = process.env.PAIRING_CODE || configOverrides.pairingCode || 'KYUU2026';
 global.cloudflaredToken = process.env.CLOUDFLARED_TOKEN || configOverrides.cloudflaredToken || '';
 
-
-
 global.linkTitle = 'mommy kyu';
-global.linkDesc = '© momm? yeah son';
+global.linkDesc = '© mommy kyu';
 global.linkUrl = 'https://api.kyzzz.eu.cc';
-global.linkThumb = fs.existsSync('./media/menu.jpg') ? fs.readFileSync('./media/menu.jpg') : './media/menu.jpg';
-
+global.linkThumb = fs.existsSync('./media/menu.jpg')? fs.readFileSync('./media/menu.jpg') : './media/menu.jpg';
 
 global.APIs = {
   kyzz: 'https://api.kyzzz.eu.cc',
@@ -67,37 +64,36 @@ global.APIKeys = {
 
 global.API = (name, path = '/', params = {}, apiKeyLabel = '') => {
   const base = global.APIs[name];
-  if (!base) throw new Error(`[API] Base URL untuk "${name}" tidak ditemukan di global.APIs`);
+  if (!base) throw new Error(`[API] Base URL for "${name}" not found in global.APIs`);
   const url = new URL(path, base);
   for (const [k, v] of Object.entries(params)) {
-    if (v !== undefined && v !== null && v !== '') url.searchParams.set(k, v);
+    if (v!== undefined && v!== null && v!== '') url.searchParams.set(k, v);
   }
   if (apiKeyLabel) {
     const key = global.APIKeys[base];
-    if (key) url.searchParams.set(apiKeyLabel === true ? 'apikey' : apiKeyLabel, key);
+    if (key) url.searchParams.set(apiKeyLabel === true? 'apikey' : apiKeyLabel, key);
   }
   return url.toString();
 };
 
-
 global.msg = {
-  owner: '❌ Perintah ini khusus untuk Owner Bot!',
-  premium: '❌ Perintah ini khusus untuk Pengguna Premium!',
-  group: '❌ Perintah ini hanya bisa digunakan di dalam Grup!',
-  private: '❌ Perintah ini hanya bisa digunakan di Chat Pribadi!',
-  register: '❌ Kamu belum terdaftar!\nGunakan perintah *.register [nama]* terlebih dahulu.',
-  limit: '❌ *Limit harian kamu telah habis!*\n\n📌 Limit direset setiap hari pukul 00.00 WIB.\n💎 Upgrade ke *Premium* untuk akses tanpa limit.',
-  wait: '⏳ Sedang diproses, mohon tunggu...',
-  error: '❌ Terjadi kesalahan pada sistem.',
-  admin: '❌ Perintah ini hanya bisa digunakan oleh Admin Grup!',
-  botAdmin: '❌ Bot harus menjadi Admin Grup terlebih dahulu!'
+  owner: '❌ This command is for Bot Owner only!',
+  premium: '❌ This command is for Premium Users only!',
+  group: '❌ This command can only be used in Groups!',
+  private: '❌ This command can only be used in Private Chat!',
+  register: '❌ You are not registered yet!\nUse the *.register [name]* command first.',
+  limit: '❌ *Your daily limit has been used up!*\n\n📌 Limit resets every day at 00:00 WIB.\n💎 Upgrade to *Premium* for unlimited access.',
+  wait: '⏳ Processing, please wait...',
+  error: '❌ A system error occurred.',
+  admin: '❌ This command can only be used by Group Admins!',
+  botAdmin: '❌ Bot must be a Group Admin first!'
 };
 
 global.mess = global.msg;
 
 global.bot = {
   name: global.botname,
-  versions: global.version,
+  version: global.version, // fixed: was "versions"
   owner: global.owner,
   author: {
     name: global.author,
