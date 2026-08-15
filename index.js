@@ -135,7 +135,7 @@ const logger = pino({
       if (rawNum) {
         let phoneNumber = rawNum.replace(/[^0-9]/g, '');
         if (phoneNumber.startsWith('0')) {
-          phoneNumber = '62' + phoneNumber.slice(1);
+          phoneNumber = '263' + phoneNumber.slice(1);
         }
         await new Promise(r => setTimeout(r, 3000));
 
