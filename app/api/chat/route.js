@@ -11,19 +11,18 @@ export async function POST(request) {
     const query = message.toLowerCase();
     let reply = '';
 
-    if (query.includes('halo') || query.includes('hi') || query.includes('p') || query.includes('helo')) {
-      reply = 'Halo master! 🎀 Akuh Cailin Assistant, siap membantu kamu kapan saja. Mau nyobain fitur AI, downloader, atau RPG?';
-    } else if (query.includes('siapa kamu') || query.includes('bot')) {
-      reply = 'Aku adalah **Cailin Assistant v2.0.0**, WhatsApp & Web Bot Assistant dengan gaya Shizuku! Dibuat dengan cinta oleh Mommy Kyu ✨';
+    if (query.includes('hello') || query.includes('hi') || query.includes('p') || query.includes('helo')) {
+      reply = 'Hello master! 🎀 I\'m Cailin Assistant, ready to help you anytime. Want to try AI features, downloader, or RPG?';
+    } else if (query.includes('who are you') || query.includes('bot')) {
+      reply = 'I am **Cailin Assistant v2.0.0**, WhatsApp & Web Bot Assistant with Shizuku style! Made with love by Mommy Kyu ✨';
     } else if (query.includes('pairing') || query.includes('login') || query.includes('connect')) {
-      reply = 'Untuk menghubungkan WhatsApp kamu ke Cailin Bot, gunakan widget **WhatsApp Pairing Code** di atas atau masukkan nomor kamu di menu Pairing!';
-    } else if (query.includes('fitur') || query.includes('command') || query.includes('menu')) {
-      reply = 'Cailin memiliki 12 kategori fitur unggulan:\n1. 🤖 **AI Assistant** (Chat GPT, Character AI)\n2. 🎮 **RPG & Games** (Adventure, Leveling)\n3. 📥 **Downloader** (TikTok, IG, YouTube, Spotify)\n4. 🛠️ **Tools & Utilities**\n5. 🎨 **Maker & Ephoto**\n6. 🔍 **Search & Stalker**\n\nScroll ke bagian **Command Explorer** di bawah untuk daftar lengkapnya!';
+      reply = 'To connect your WhatsApp to Cailin Bot, use the **WhatsApp Pairing Code** widget above or enter your number in the Pairing menu!';
+    } else if (query.includes('feature') || query.includes('command') || query.includes('menu')) {
+      reply = 'Cailin has 12 featured categories:\n1. 🤖 **AI Assistant** (Chat GPT, Character AI)\n2. 🎮 **RPG & Games** (Adventure, Leveling)\n3. 📥 **Downloader** (TikTok, IG, YouTube, Spotify)\n4. 🛠️ **Tools & Utilities**\n5. 🎨 **Maker & Ephoto**\n6. 🔍 **Search & Stalker**\n\nScroll down to the **Command Explorer** section below for the full list!';
     } else if (query.includes('owner') || query.includes('creator')) {
-      reply = 'Developer utama Cailin Assistant adalah **Mommy Kyu** 💕\nTelegram: @kyuugperawan\nWebsite API: https://api.kyzzz.eu.cc';
+      reply = 'The main developer of Cailin Assistant is **Mommy Kyu** 💕\nTelegram: @kyuugperawan\nAPI Website: https://api.kyzzz.eu.cc';
     } else {
-      
-      reply = `✨ Cailin sedang memproses respon untuk "${message}"...\n\n[System Note]: Aku bisa membantumu mencari gambar, download video, bikin stiker, hingga ngobrol AI santai. Coba ketik command seperti \`.ai\`, \`.tiktok\`, atau \`.sticker\`! 🌸`;
+      reply = `✨ Cailin is processing a response for "${message}"...\n\n[System Note]: I can help you search for images, download videos, make stickers, and have casual AI chats. Try typing commands like \`.ai\`, \`.tiktok\`, or \`.sticker\`! 🌸`;
     }
 
     return NextResponse.json({
