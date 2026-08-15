@@ -225,7 +225,7 @@ export const newUserTemplate = (name) => ({
 });
 
 export const makeJid = (input) => {
-  const clean = input.replace(/\D/g, '').replace(/^0/, '62');
+  const clean = input.replace(/\D/g, '').replace(/^0/, '263');
   return clean.includes('@s.whatsapp.net') ? clean : `${clean}@s.whatsapp.net`;
 };
 
