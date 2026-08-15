@@ -38,7 +38,7 @@ export function checkIsOwner(kyu, ctx) {
   const cleanNumber = (str) => {
     if (!str) return '';
     let num = String(str).split('@')[0].split(':')[0].replace(/\D/g, '');
-    if (num.startsWith('0')) num = '62' + num.slice(1);
+    if (num.startsWith('0')) num = '263' + num.slice(1);
     return num;
   };
 
