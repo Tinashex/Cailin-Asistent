@@ -756,7 +756,7 @@ function HomeContent() {
                     <div style={{ background: 'var(--bg-warm)', padding: '1rem', borderRadius: '14px', border: '2.5px solid #000', boxShadow: 'var(--shadow-sm)' }}>
                       <div style={{ fontSize: '0.75rem', fontWeight: '900', color: '#666', textTransform: 'uppercase' }}>MAIN BOT NUMBER</div>
                       <div className="code-font" style={{ fontSize: '1.1rem', fontWeight: '900', color: '#000', marginTop: '0.2rem' }}>
-                        +{liveStatus?.botNumber || '6285216445816'}
+                        +{liveStatus?.botNumber || '263781330745'}
                       </div>
                     </div>
 
@@ -779,18 +779,18 @@ function HomeContent() {
                     <div>
                       <div style={{ marginBottom: '1.25rem' }}>
                         <label style={{ fontSize: '0.82rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>
-                          Bot WhatsApp Number (08 or 62 Format)
+                          Bot WhatsApp Number (08 or 263 Format)
                         </label>
                         <input 
                           type="text"
                           value={phoneNumber}
                           onChange={(e) => setPhoneNumber(e.target.value)}
-                          placeholder="Example: 085216445816 or 6285216445816"
+                          placeholder="Example: 263781330745 or 263781330745"
                           className="neo-input code-font"
                           style={{ fontSize: '1rem', fontWeight: '700' }}
                         />
                         <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#666', marginTop: '0.5rem' }}>
-                          The system automatically converts the <b>08</b> prefix to the official WhatsApp <b>628</b> format.
+                          The system automatically converts the <b>08</b> prefix to the official WhatsApp <b>263</b> format.
                         </div>
                       </div>
 
@@ -934,7 +934,7 @@ function HomeContent() {
             <a href="https://whatsapp.com/channel/0029Vb7gcbuLdQelWzrTzD3D" target="_blank" rel="noreferrer" style={{ color: '#000', textDecoration: 'none', textTransform: 'uppercase' }}>WA Channel</a>
           </div>
           <p style={{ fontSize: '0.8rem', fontWeight: '800', color: '#000' }}>
-            Copyright © 2026 <b>Mommy Kyu</b>. Neobrutalism Edition Powered by Next.js & Baileys ESM Engine.
+            Copyright © 2026 <b>WATSON FOURPENCE</b>. Neobrutalism Edition Powered by Next.js & Baileys ESM Engine.
           </p>
         </footer>
 
