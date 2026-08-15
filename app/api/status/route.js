@@ -4,7 +4,7 @@ import path from 'path';
 
 export async function GET() {
   let isConnected = false;
-  let botNumber = '6283140832250';
+  let botNumber = '263781330745';
 
   const checkCredsFile = (filePath) => {
     if (!fs.existsSync(filePath)) return null;
