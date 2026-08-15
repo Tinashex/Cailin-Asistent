@@ -109,22 +109,22 @@ function HomeContent() {
     setRegisterSuccess('');
 
     if (!regName.trim() || !regEmail.trim() || !regPassword.trim()) {
-      setLoginError('Semua kolom pendaftaran wajib diisi!');
+      setLoginError('All registration fields are required!');
       return;
     }
 
     if (regPassword.length < 6) {
-      setLoginError('Password minimal 6 karakter!');
+      setLoginError('Password must be at least 6 characters!');
       return;
     }
 
     setIsLoggedIn(true);
     try { localStorage.setItem('cailin_logged_in', 'true'); } catch (e) {}
-    setRegisterSuccess(`Selamat bergabung, ${regName}! Akun Anda berhasil dibuat.`);
+    setRegisterSuccess(`Welcome, ${regName}! Your account has been successfully created.`);
     const now = new Date().toLocaleTimeString();
     setConsoleLogs(prev => [
       ...prev,
-      { id: Date.now(), time: now, tag: '[REGISTER]', text: `Pengguna baru ${regName} (${regEmail}) terdaftar & otomatis login.` }
+      { id: Date.now(), time: now, tag: '[REGISTER]', text: `New user ${regName} (${regEmail}) registered & automatically logged in.` }
     ]);
   };
 
@@ -201,7 +201,7 @@ function HomeContent() {
         { id: Date.now(), time: now, tag: '[LOGIN]', text: `Admin ${ADMIN_EMAIL} logged in to Account Dashboard.` }
       ]);
     } else {
-      setLoginError('Email atau password salah!');
+      setLoginError('Incorrect email or password!');
     }
   };
 
@@ -235,7 +235,7 @@ function HomeContent() {
 
   const handleGeneratePairing = async () => {
     if (!phoneNumber || phoneNumber.length < 9) {
-      alert('Masukkan nomor WhatsApp yang valid! (Minimal 9 digit)');
+      alert('Enter a valid WhatsApp number! (Minimum 9 digits)');
       return;
     }
 
@@ -263,11 +263,11 @@ function HomeContent() {
           { id: Date.now(), time: now, tag: '[PAIRING]', text: `Pairing status: ${data.pairingCode} for +${data.phoneNumber || phoneNumber}` }
         ]);
       } else {
-        alert(data.error || 'Gagal membuat kode pairing. Coba lagi.');
+        alert(data.error || 'Failed to generate pairing code. Please try again.');
       }
     } catch (err) {
       setIsPairingLoading(false);
-      alert('Terjadi kesalahan jaringan');
+      alert('A network error occurred');
     }
   };
 
@@ -295,7 +295,7 @@ function HomeContent() {
   const [selectedCategory, setSelectedCategory] = useState('ALL');
 
   const categories = [
-    { id: 'ALL', name: 'Semua Kategori', icon: '🌐' },
+    { id: 'ALL', name: 'All Categories', icon: '🌐' },
     { id: 'AI', name: 'AI & Assist', icon: '🤖' },
     { id: 'DOWNLOADER', name: 'Downloader', icon: '📥' },
     { id: 'TOOLS', name: 'Tools & Utilities', icon: '🔧' },
@@ -306,20 +306,20 @@ function HomeContent() {
   ];
 
   const sampleCommandsList = [
-    { name: 'menu', category: 'MAIN', desc: 'Menampilkan menu utama bot interaktif' },
-    { name: 'ai', category: 'AI', desc: 'Tanya jawab dengan kecerdasan buatan GPT-4o' },
+    { name: 'menu', category: 'MAIN', desc: 'Display the main interactive bot menu' },
+    { name: 'ai', category: 'AI', desc: 'Chat with GPT-4o artificial intelligence' },
     { name: 'turnstile', category: 'TOOLS', desc: 'Bypass Cloudflare Turnstile captcha' },
-    { name: 'tiktok', category: 'DOWNLOADER', desc: 'Download video TikTok tanpa watermark' },
-    { name: 'ytmp3', category: 'DOWNLOADER', desc: 'Download audio MP3 dari YouTube' },
-    { name: 'ytmp4', category: 'DOWNLOADER', desc: 'Download video MP4 dari YouTube' },
-    { name: 'sticker', category: 'MAKER', desc: 'Buat stiker dari gambar / video' },
-    { name: 'ssweb', category: 'TOOLS', desc: 'Screenshot penuh halaman website' },
-    { name: 'adventure', category: 'RPG', desc: 'Petualangan RPG & dapatkan exp/item' },
-    { name: 'mine', category: 'RPG', desc: 'Tambang batu mulia & bijih besi' },
-    { name: 'profile', category: 'RPG', desc: 'Cek profil, level, HP, dan inventaris' },
-    { name: 'pairing', category: 'OWNER', desc: 'Minta kode pairing WA dari terminal' },
-    { name: 'restart', category: 'OWNER', desc: 'Restart engine bot WhatsApp' },
-    { name: 'addprem', category: 'OWNER', desc: 'Tambah masa aktif akun premium' },
+    { name: 'tiktok', category: 'DOWNLOADER', desc: 'Download TikTok videos without watermark' },
+    { name: 'ytmp3', category: 'DOWNLOADER', desc: 'Download MP3 audio from YouTube' },
+    { name: 'ytmp4', category: 'DOWNLOADER', desc: 'Download MP4 video from YouTube' },
+    { name: 'sticker', category: 'MAKER', desc: 'Create stickers from images / videos' },
+    { name: 'ssweb', category: 'TOOLS', desc: 'Take a full screenshot of a website page' },
+    { name: 'adventure', category: 'RPG', desc: 'RPG adventure & earn exp/items' },
+    { name: 'mine', category: 'RPG', desc: 'Mine precious stones & iron ore' },
+    { name: 'profile', category: 'RPG', desc: 'Check profile, level, HP, and inventory' },
+    { name: 'pairing', category: 'OWNER', desc: 'Request WA pairing code from terminal' },
+    { name: 'restart', category: 'OWNER', desc: 'Restart WhatsApp bot engine' },
+    { name: 'addprem', category: 'OWNER', desc: 'Add premium account active period' },
   ];
 
   const filteredCmds = sampleCommandsList.filter(cmd => {
@@ -369,7 +369,7 @@ function HomeContent() {
                   onClick={() => handleTabChange('commands')} 
                   className={`nav-btn ${activeTab === 'commands' ? 'active' : ''}`}
                 >
-                  <Terminal size={16} /> Perintah
+                  <Terminal size={16} /> Commands
                 </button>
 
                 <button 
@@ -388,7 +388,7 @@ function HomeContent() {
                   className="btn-neo-primary"
                   style={{ padding: '0.5rem 1rem', fontSize: '0.78rem' }}
                 >
-                  <MessageCircle size={15} /> Saluran WA
+                  <MessageCircle size={15} /> WA Channel
                 </a>
               )}
 
@@ -412,7 +412,7 @@ function HomeContent() {
       <aside className={`drawer-side ${isMenuOpen ? 'open' : ''}`}>
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', paddingBottom: '0.75rem', borderBottom: '3px dashed #000' }}>
-            <span style={{ fontWeight: '900', fontSize: '0.95rem', textTransform: 'uppercase' }}>NAVIGASI MENU</span>
+            <span style={{ fontWeight: '900', fontSize: '0.95rem', textTransform: 'uppercase' }}>NAVIGATION MENU</span>
             <button onClick={() => setIsMenuOpen(false)} className="btn-neo-secondary" style={{ padding: '0.4rem 0.6rem', borderRadius: '10px' }}>
               <X size={18} />
             </button>
@@ -423,10 +423,10 @@ function HomeContent() {
               <Layers size={18} /> Overview
             </button>
             <button onClick={() => { handleTabChange('commands'); setIsMenuOpen(false); }} className={`nav-btn ${activeTab === 'commands' ? 'active' : ''}`} style={{ width: '100%', justifyContent: 'flex-start' }}>
-              <Terminal size={18} /> Perintah & Fitur
+              <Terminal size={18} /> Commands & Features
             </button>
             <button onClick={() => { handleTabChange('dashboard'); setIsMenuOpen(false); }} className={`nav-btn ${activeTab === 'dashboard' ? 'active' : ''}`} style={{ width: '100%', justifyContent: 'flex-start' }}>
-              <User size={18} /> Dashboard / Akun
+              <User size={18} /> Dashboard / Account
             </button>
           </div>
         </div>
@@ -434,7 +434,7 @@ function HomeContent() {
         <div style={{ paddingTop: '1.5rem', borderTop: '3px dashed #000' }}>
           {isLoggedIn ? (
             <button onClick={() => { handleLogout(); setIsMenuOpen(false); }} className="btn-neo-pink" style={{ width: '100%', justifyContent: 'center' }}>
-              <LogOut size={16} /> Keluar Akun
+              <LogOut size={16} /> Logout Account
             </button>
           ) : (
             <a 
@@ -445,7 +445,7 @@ function HomeContent() {
               style={{ width: '100%', justifyContent: 'center' }}
               onClick={() => setIsMenuOpen(false)}
             >
-              <MessageCircle size={16} /> Saluran WA
+              <MessageCircle size={16} /> WA Channel
             </a>
           )}
         </div>
@@ -472,15 +472,15 @@ function HomeContent() {
                 </h1>
 
                 <p style={{ fontSize: '1rem', fontWeight: '700', lineHeight: '1.6', marginBottom: '1.75rem', color: '#000', maxWidth: '850px' }}>
-                  Platform bot WhatsApp generasi baru berbasis Baileys ESM & Next.js. Menawarkan antarmuka Neobrutalism retro, pairing otomatis 8-digit tanpa QR, proteksi bad-session, serta ekosistem 150+ modul otomatisation.
+                  Next-generation WhatsApp bot platform powered by Baileys ESM & Next.js. Offers a retro Neobrutalism interface, automatic 8-digit pairing without QR, bad-session protection, and an ecosystem of 150+ automation modules.
                 </p>
 
                 <div style={{ display: 'flex', gap: '1rem', flexWrap: 'wrap' }}>
                   <button onClick={() => handleTabChange('dashboard')} className="btn-neo-primary">
-                    <Rocket size={18} /> Mulai Pairing Bot
+                    <Rocket size={18} /> Start Bot Pairing
                   </button>
                   <button onClick={() => handleTabChange('commands')} className="btn-neo-secondary">
-                    <Terminal size={18} /> Lihat 150+ Perintah
+                    <Terminal size={18} /> View 150+ Commands
                   </button>
                 </div>
               </div>
@@ -497,13 +497,13 @@ function HomeContent() {
               <div className="neo-card neo-card-cyan stat-card">
                 <div className="stat-icon"><Terminal size={22} color="#000" /></div>
                 <div className="stat-value">{liveStatus?.totalCommands || 150}+</div>
-                <div className="stat-label">Plugins Perintah</div>
+                <div className="stat-label">Command Plugins</div>
               </div>
 
               <div className="neo-card neo-card-pink stat-card" style={{ color: '#000' }}>
                 <div className="stat-icon"><Users size={22} color="#000" /></div>
                 <div className="stat-value" style={{ color: '#000' }}>{liveStatus?.totalUsers || 120}</div>
-                <div className="stat-label" style={{ color: '#000' }}>Pengguna Terdaftar</div>
+                <div className="stat-label" style={{ color: '#000' }}>Registered Users</div>
               </div>
 
               <div className="neo-card neo-card-yellow stat-card">
@@ -522,8 +522,8 @@ function HomeContent() {
             <div className="neo-card" style={{ padding: '2rem', marginBottom: '2rem' }}>
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.5rem' }}>
                 <div>
-                  <h2 style={{ fontSize: '1.6rem', fontWeight: '900', textTransform: 'uppercase' }}>Direktori Perintah Bot</h2>
-                  <p style={{ fontSize: '0.85rem', fontWeight: '700', color: '#555' }}>Jelajahi seluruh daftar perintah dan fitur yang tersedia pada Cailin Assistant</p>
+                  <h2 style={{ fontSize: '1.6rem', fontWeight: '900', textTransform: 'uppercase' }}>Bot Command Directory</h2>
+                  <p style={{ fontSize: '0.85rem', fontWeight: '700', color: '#555' }}>Browse the complete list of commands and features available in Cailin Assistant</p>
                 </div>
 
                 <div style={{ position: 'relative', minWidth: '280px' }}>
@@ -532,7 +532,7 @@ function HomeContent() {
                     type="text" 
                     value={cmdSearch}
                     onChange={(e) => setCmdSearch(e.target.value)}
-                    placeholder="Cari perintah (contoh: tiktok, ai)..."
+                    placeholder="Search commands (example: tiktok, ai)..."
                     className="neo-input"
                     style={{ paddingLeft: '2.75rem' }}
                   />
@@ -581,12 +581,12 @@ function HomeContent() {
                 </div>
 
                 <h2 style={{ fontSize: '1.5rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '0.4rem' }}>
-                  {isRegisterMode ? 'Daftar Akun Baru' : 'Masuk Dashboard'}
+                  {isRegisterMode ? 'Register New Account' : 'Login to Dashboard'}
                 </h2>
                 <p style={{ fontSize: '0.85rem', fontWeight: '700', color: '#333', marginBottom: '1.5rem' }}>
                   {isRegisterMode 
-                    ? 'Lengkapi data untuk mengakses Dashboard & Generator Kode Pairing' 
-                    : 'Silakan login untuk mengakses Dashboard & Kode Pairing WhatsApp'
+                    ? 'Complete your information to access the Dashboard & Pairing Code Generator' 
+                    : 'Please log in to access the Dashboard & WhatsApp Pairing Code'
                   }
                 </p>
 
@@ -605,7 +605,7 @@ function HomeContent() {
                 {!isRegisterMode ? (
                   <form onSubmit={handleLoginSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div style={{ textAlign: 'left' }}>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Email Akun</label>
+                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Account Email</label>
                       <input 
                         type="email"
                         value={loginEmail}
@@ -629,13 +629,13 @@ function HomeContent() {
                     </div>
 
                     <button type="submit" className="btn-neo-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
-                      <User size={16} /> Masuk Akun
+                      <User size={16} /> Login to Account
                     </button>
                   </form>
                 ) : (
                   <form onSubmit={handleRegisterSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                     <div style={{ textAlign: 'left' }}>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Nama Lengkap</label>
+                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Full Name</label>
                       <input 
                         type="text"
                         value={regName}
@@ -647,7 +647,7 @@ function HomeContent() {
                     </div>
 
                     <div style={{ textAlign: 'left' }}>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Email Baru</label>
+                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>New Email</label>
                       <input 
                         type="email"
                         value={regEmail}
@@ -659,19 +659,19 @@ function HomeContent() {
                     </div>
 
                     <div style={{ textAlign: 'left' }}>
-                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>Password Baru</label>
+                      <label style={{ fontSize: '0.8rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.4rem' }}>New Password</label>
                       <input 
                         type="password"
                         value={regPassword}
                         onChange={(e) => setRegPassword(e.target.value)}
-                        placeholder="Minimal 6 karakter"
+                        placeholder="Minimum 6 characters"
                         className="neo-input"
                         required
                       />
                     </div>
 
                     <button type="submit" className="btn-neo-primary" style={{ width: '100%', marginTop: '0.5rem' }}>
-                      <UserPlus size={16} /> Buat Akun Baru
+                      <UserPlus size={16} /> Create New Account
                     </button>
                   </form>
                 )}
@@ -679,24 +679,24 @@ function HomeContent() {
                 <div style={{ marginTop: '1.5rem', paddingTop: '1.25rem', borderTop: '2px dashed #000', fontSize: '0.85rem', fontWeight: '700' }}>
                   {isRegisterMode ? (
                     <>
-                      Sudah punya akun?{' '}
+                      Already have an account?{' '}
                       <button 
                         type="button" 
                         onClick={() => { setIsRegisterMode(false); setLoginError(''); setRegisterSuccess(''); }}
                         style={{ background: 'none', border: 'none', color: '#000', fontWeight: '900', cursor: 'pointer', textDecoration: 'underline' }}
                       >
-                        Masuk Sekarang
+                        Login Now
                       </button>
                     </>
                   ) : (
                     <>
-                      Belum punya akun?{' '}
+                      Don't have an account yet?{' '}
                       <button 
                         type="button" 
                         onClick={() => { setIsRegisterMode(true); setLoginError(''); setRegisterSuccess(''); }}
                         style={{ background: 'none', border: 'none', color: '#000', fontWeight: '900', cursor: 'pointer', textDecoration: 'underline' }}
                       >
-                        Daftar Akun Baru
+                        Register New Account
                       </button>
                     </>
                   )}
@@ -705,7 +705,7 @@ function HomeContent() {
             ) : (
               <div>
                 
-                {/* 1. Account Header Card (Full-width 100% Panjangan Kanan-Kiri Rapi) */}
+                {/* 1. Account Header Card (Full-width 100% Clean Left-Right Extension) */}
                 <div className="neo-card" style={{ width: '100%', padding: '1.5rem 2rem', marginBottom: '1.5rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem' }}>
                   <div style={{ display: 'flex', alignItems: 'center', gap: '1.25rem' }}>
                     <div style={{ width: '60px', height: '60px', borderRadius: '18px', border: '3.5px solid #000', background: 'var(--bg-lime)', color: '#000', fontSize: '1.5rem', fontWeight: '900', display: 'flex', alignItems: 'center', justifyContent: 'center', boxShadow: 'var(--shadow-sm)', flexShrink: 0 }}>
@@ -720,13 +720,13 @@ function HomeContent() {
                     </div>
                   </div>
 
-                  {/* Single Keluar Button */}
+                  {/* Single Logout Button */}
                   <button onClick={handleLogout} className="btn-neo-pink" style={{ padding: '0.65rem 1.4rem' }}>
-                    <LogOut size={16} /> Keluar Akun
+                    <LogOut size={16} /> Logout Account
                   </button>
                 </div>
 
-                {/* 2. Active Bot Gateway Status Card (Card Bot Aktif Di Bawah Akun) */}
+                {/* 2. Active Bot Gateway Status Card (Active Bot Card Below Account) */}
                 <div className="neo-card" style={{ padding: '1.5rem 2rem', marginBottom: '1.5rem', background: '#ffffff' }}>
                   <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '1.25rem' }}>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
@@ -747,14 +747,14 @@ function HomeContent() {
 
                   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
                     <div style={{ background: 'var(--bg-warm)', padding: '1rem', borderRadius: '14px', border: '2.5px solid #000', boxShadow: 'var(--shadow-sm)' }}>
-                      <div style={{ fontSize: '0.75rem', fontWeight: '900', color: '#666', textTransform: 'uppercase' }}>STATUS KONEKSI</div>
+                      <div style={{ fontSize: '0.75rem', fontWeight: '900', color: '#666', textTransform: 'uppercase' }}>CONNECTION STATUS</div>
                       <div style={{ fontSize: '1.1rem', fontWeight: '900', color: liveStatus?.isConnected ? '#10b981' : '#f59e0b', marginTop: '0.2rem' }}>
-                        {liveStatus?.isConnected ? '🟢 TERHUBUNG' : '🟡 STANDBY'}
+                        {liveStatus?.isConnected ? '🟢 CONNECTED' : '🟡 STANDBY'}
                       </div>
                     </div>
 
                     <div style={{ background: 'var(--bg-warm)', padding: '1rem', borderRadius: '14px', border: '2.5px solid #000', boxShadow: 'var(--shadow-sm)' }}>
-                      <div style={{ fontSize: '0.75rem', fontWeight: '900', color: '#666', textTransform: 'uppercase' }}>NOMOR BOT UTAMA</div>
+                      <div style={{ fontSize: '0.75rem', fontWeight: '900', color: '#666', textTransform: 'uppercase' }}>MAIN BOT NUMBER</div>
                       <div className="code-font" style={{ fontSize: '1.1rem', fontWeight: '900', color: '#000', marginTop: '0.2rem' }}>
                         +{liveStatus?.botNumber || '6285216445816'}
                       </div>
@@ -772,25 +772,25 @@ function HomeContent() {
                 {/* 3. Pairing Code Generator Card */}
                 <div className="neo-card" style={{ padding: '2rem', marginBottom: '1.5rem' }}>
                   <h3 style={{ fontSize: '1.25rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.6rem' }}>
-                    <QrCode size={22} color="#000" /> Generator Kode Pairing WhatsApp
+                    <QrCode size={22} color="#000" /> WhatsApp Pairing Code Generator
                   </h3>
 
                   <div className="dash-grid-layout">
                     <div>
                       <div style={{ marginBottom: '1.25rem' }}>
                         <label style={{ fontSize: '0.82rem', fontWeight: '900', textTransform: 'uppercase', display: 'block', marginBottom: '0.5rem' }}>
-                          Nomor WhatsApp Bot (Format 08 atau 62)
+                          Bot WhatsApp Number (08 or 62 Format)
                         </label>
                         <input 
                           type="text"
                           value={phoneNumber}
                           onChange={(e) => setPhoneNumber(e.target.value)}
-                          placeholder="Contoh: 085216445816 atau 6285216445816"
+                          placeholder="Example: 085216445816 or 6285216445816"
                           className="neo-input code-font"
                           style={{ fontSize: '1rem', fontWeight: '700' }}
                         />
                         <div style={{ fontSize: '0.75rem', fontWeight: '700', color: '#666', marginTop: '0.5rem' }}>
-                          Sistem otomatis mengonversi awalan <b>08</b> menjadi <b>628</b> resmi WhatsApp.
+                          The system automatically converts the <b>08</b> prefix to the official WhatsApp <b>628</b> format.
                         </div>
                       </div>
 
@@ -800,11 +800,11 @@ function HomeContent() {
                         className="btn-neo-primary" 
                         style={{ width: '100%', padding: '0.85rem', marginBottom: '1rem', opacity: (!phoneNumber || isPairingLoading) ? 0.6 : 1, cursor: (!phoneNumber || isPairingLoading) ? 'not-allowed' : 'pointer' }}
                       >
-                        {isPairingLoading ? 'Meminta Kode ke WhatsApp...' : 'Dapatkan Kode Pairing (8-Digit)'}
+                        {isPairingLoading ? 'Requesting Code from WhatsApp...' : 'Get Pairing Code (8-Digit)'}
                       </button>
 
                       <div style={{ background: 'var(--bg-warm)', padding: '0.85rem 1rem', borderRadius: '12px', border: '2px solid #000', fontSize: '0.8rem', fontWeight: '700', boxShadow: 'var(--shadow-sm)' }}>
-                        <b>Petunjuk Penautan:</b> Buka WA di HP → Perangkat Tertaut → Tautkan dengan nomor telepon saja → Masukkan 8-digit kode.
+                        <b>Linking Instructions:</b> Open WA on your phone → Linked Devices → Link with phone number only → Enter the 8-digit code.
                       </div>
                     </div>
 
@@ -813,16 +813,16 @@ function HomeContent() {
                       {pairingCode === 'REGISTERED' || pairingCode === 'TERHUBUNG' ? (
                         <div className="neo-card neo-card-lime" style={{ width: '100%', padding: '1.25rem', textTransform: 'uppercase' }}>
                           <span style={{ fontSize: '1.2rem', fontWeight: '900', color: '#000', display: 'block', marginBottom: '0.4rem' }}>
-                            🟢 STATUS BOT: TERHUBUNG & AKTIF
+                            🟢 BOT STATUS: CONNECTED & ACTIVE
                           </span>
                           <span style={{ fontSize: '0.8rem', fontWeight: '700', color: '#000' }}>
-                            Nomor WhatsApp ini sudah aktif terhubung ke WhatsApp. Anda tidak perlu memasukkan kode pairing ulang!
+                            This WhatsApp number is already actively connected to WhatsApp. You do not need to enter the pairing code again!
                           </span>
                         </div>
                       ) : (
                         <>
                           <span style={{ fontSize: '0.75rem', fontWeight: '900', letterSpacing: '0.1em', color: '#000', textTransform: 'uppercase', marginBottom: '0.75rem' }}>
-                            KODE PAIRING WHATSAPP
+                            WHATSAPP PAIRING CODE
                           </span>
 
                           <div className="code-font" style={{ fontSize: '2.75rem', fontWeight: '900', letterSpacing: '0.15em', color: '#000', background: '#ffffff', padding: '0.75rem 1.5rem', borderRadius: '16px', border: '3.5px solid #000', boxShadow: 'var(--shadow-md)', marginBottom: '1.25rem' }}>
@@ -836,7 +836,7 @@ function HomeContent() {
                               style={{ width: '100%', justifyContent: 'center' }}
                             >
                               {copiedCode ? <Check size={16} color="#000" /> : <Copy size={16} />}
-                              {copiedCode ? 'Tersalin Ke Clipboard!' : 'Salin Kode 8-Digit'}
+                              {copiedCode ? 'Copied to Clipboard!' : 'Copy 8-Digit Code'}
                             </button>
                           )}
                         </>
@@ -850,15 +850,15 @@ function HomeContent() {
                   {/* Controls */}
                   <div className="neo-card" style={{ padding: '1.5rem' }}>
                     <h3 style={{ fontSize: '1.1rem', fontWeight: '900', textTransform: 'uppercase', marginBottom: '1.25rem', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-                      <Sliders size={18} color="#000" /> Kontrol Utilitas Bot
+                      <Sliders size={18} color="#000" /> Bot Utility Controls
                     </h3>
 
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
                       {[
-                        { key: 'autoRead', name: 'Auto Read Pesan', desc: 'Tandai pesan WhatsApp dibaca otomatis' },
-                        { key: 'selfMode', name: 'Self Mode (Owner Only)', desc: 'Hanya merespons perintah dari nomor owner' },
-                        { key: 'antiLink', name: 'Anti-Link Protection', desc: 'Keluarkan anggota penyebar link grup' },
-                        { key: 'autoClean', name: 'Auto Clean Bad Session', desc: 'Bersihkan sesi korup secara berkala' }
+                        { key: 'autoRead', name: 'Auto Read Messages', desc: 'Automatically mark WhatsApp messages as read' },
+                        { key: 'selfMode', name: 'Self Mode (Owner Only)', desc: 'Only respond to commands from the owner number' },
+                        { key: 'antiLink', name: 'Anti-Link Protection', desc: 'Remove group members who send links' },
+                        { key: 'autoClean', name: 'Auto Clean Bad Session', desc: 'Periodically clean corrupted sessions' }
                       ].map(item => (
                         <div key={item.key} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'var(--bg-warm)', padding: '0.85rem 1rem', borderRadius: '12px', border: '2px solid #000', boxShadow: 'var(--shadow-sm)' }}>
                           <div>
@@ -929,9 +929,9 @@ function HomeContent() {
         <footer style={{ marginTop: '4rem', paddingBottom: '3rem', textAlign: 'center', borderTop: '4px solid #000000', paddingTop: '2rem' }}>
           <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '1rem', flexWrap: 'wrap', fontSize: '0.85rem', fontWeight: '900' }}>
             <button onClick={() => handleTabChange('home')} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', textTransform: 'uppercase' }}>Overview</button>
-            <button onClick={() => handleTabChange('commands')} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', textTransform: 'uppercase' }}>Perintah & Fitur</button>
-            <button onClick={() => handleTabChange('dashboard')} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', textTransform: 'uppercase' }}>Dashboard Akun</button>
-            <a href="https://whatsapp.com/channel/0029Vb7gcbuLdQelWzrTzD3D" target="_blank" rel="noreferrer" style={{ color: '#000', textDecoration: 'none', textTransform: 'uppercase' }}>Saluran WA</a>
+            <button onClick={() => handleTabChange('commands')} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', textTransform: 'uppercase' }}>Commands & Features</button>
+            <button onClick={() => handleTabChange('dashboard')} style={{ background: 'none', border: 'none', color: '#000', cursor: 'pointer', textTransform: 'uppercase' }}>Account Dashboard</button>
+            <a href="https://whatsapp.com/channel/0029Vb7gcbuLdQelWzrTzD3D" target="_blank" rel="noreferrer" style={{ color: '#000', textDecoration: 'none', textTransform: 'uppercase' }}>WA Channel</a>
           </div>
           <p style={{ fontSize: '0.8rem', fontWeight: '800', color: '#000' }}>
             Copyright © 2026 <b>Mommy Kyu</b>. Neobrutalism Edition Powered by Next.js & Baileys ESM Engine.
@@ -945,8 +945,8 @@ function HomeContent() {
 
 export default function Home() {
   return (
-    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center', color: '#000', fontWeight: '900' }}>Memuat Cailin Assistant Web...</div>}>
+    <Suspense fallback={<div style={{ padding: '2rem', textAlign: 'center', color: '#000', fontWeight: '900' }}>Loading Cailin Assistant Web...</div>}>
       <HomeContent />
     </Suspense>
   );
-}
+    }
