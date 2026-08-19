@@ -1,9 +1,22 @@
 {
-  "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
+  "framework": "nextjs",
+  "buildCommand": "npm run build",
+  "installCommand": "npm install",
+  "functions": {
+    "app/api/account/route.js": {
+      "maxDuration": 30
+    },
+    "app/api/status/route.js": {
+      "maxDuration": 10
+    },
+    "app/api/logs/route.js": {
+      "maxDuration": 10
+    },
+    "app/api/auth/session/route.js": {
+      "maxDuration": 10
     }
-  ]
+  },
+  "env": {
+    "NODE_ENV": "production"
+  }
 }
