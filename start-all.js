@@ -4,6 +4,14 @@ import path from 'path';
 import chalk from 'chalk';
 import './core/config.js';
 
+// FIX: Don't run this starter on Vercel — Vercel runs Next.js automatically
+if (process.env.VERCEL) {
+  console.log(chalk.yellow('[INFO] Running on Vercel — skipping local server starter.'));
+  console.log(chalk.yellow('[INFO] Vercel will start Next.js automatically.'));
+  // Exit cleanly, don't spawn anything
+  process.exit(0);
+}
+
 console.clear();
 console.log(chalk.bold.green('\n  ✨ WATSONX-BOT v2.0.1 — WEB & BOT ENGINE  '));
 console.log(chalk.gray('  -----------------------------------------------'));
@@ -21,19 +29,19 @@ if (!fs.existsSync(nextPath)) {
 
 console.log(chalk.bold.cyan(`[1/2] 🌐 Web Interface (Port 3000) [${isBuilt ? 'Production' : 'Development'}]`));
 
-// Use node + next bin directly instead of npx to avoid Vercel chunk errors with pino
 const webCmd = isBuilt ? [nextPath, 'start', '-p', '3000'] : [nextPath, 'dev', '-p', '3000'];
 
 const webProcess = spawn('node', webCmd, {
   cwd: process.cwd(),
   stdio: 'inherit',
-  shell: false // shell: false is more stable on serverless hosts
+  shell: false
 });
 
 webProcess.on('error', (err) => {
   console.error(chalk.red('[ERROR Web Server]:'), err.message);
 });
 
+// Cloudflare Tunnel (VPS only)
 const cfToken = process.env.CLOUDFLARED_TOKEN || global.cloudflaredToken;
 
 if (cfToken) {
@@ -57,7 +65,6 @@ if (cfToken) {
       stdio: 'inherit',
       shell: false
     });
-
     cfProcess.on('error', (err) => {
       console.error(chalk.red('[ERROR Cloudflare Tunnel]:'), err.message);
     });
@@ -75,7 +82,6 @@ botProcess.on('exit', (code) => {
   console.log(chalk.yellow(`[SYSTEM] WhatsApp Bot Engine stopped (code: ${code}).`));
 });
 
-// Graceful shutdown
 process.on('SIGINT', () => {
   console.log(chalk.gray('\n[SYSTEM] Shutting down...'));
   webProcess.kill();
