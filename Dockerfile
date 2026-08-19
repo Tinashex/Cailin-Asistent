@@ -1,39 +1,34 @@
-# Base image Node.js 20 LTS Alpine
-FROM node:20-alpine AS base
+# Cailin Assistant - Docker Compose
+# For VPS / Local Docker only — Vercel does NOT use this file
 
-# Environment variables
-ENV NODE_ENV=production
-ENV PORT=3000
-
-# Set working directory
-WORKDIR /app
-
-# Install system dependencies (ffmpeg & graphics libraries for baileys & media tools)
-RUN apk add --no-cache \
-    ffmpeg \
-    imagemagick \
-    graphicsmagick \
-    python3 \
-    make \
-    g++ \
-    curl \
-    && curl -L --output /usr/local/bin/cloudflared https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64 \
-    && chmod +x /usr/local/bin/cloudflared
-
-# Copy package files
-COPY package*.json ./
-
-# Install dependencies
-RUN npm ci --only=production
-
-# Copy source code
-COPY . .
-
-# Build Next.js Web App
-RUN npm run build || true
-
-# Expose port
-EXPOSE 3000
-
-# Start command
-CMD ["npm", "start"]
+services:
+  cailin-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: cailin-assistant
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - CLOUDFLARED_TOKEN=${CLOUDFLARED_TOKEN:-}
+      - BOT_NUMBER=${BOT_NUMBER:-263781330745}
+      - PAIRING_CODE=${PAIRING_CODE:-}
+    volumes:
+      # Persist WhatsApp sessions
+      - ./session:/app/session
+      - ./session_clones:/app/session_clones
+      # Persist database and config
+      - ./data:/app/data
+      # Temp pairing codes (Vercel fix uses /tmp)
+      - ./tmp:/app/tmp
+      # Optional: persist media
+      - ./media:/app/media
+    # Optional health check
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:3000/api/status"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
