@@ -15,8 +15,8 @@ import path from 'path';
 // --- Bot Identity ---
 global.owner = ['263781330745'];
 global.botNumber = '263781330745';
-global.botname = 'WatsonX-Bot';
-global.author = '@mommykyuu';
+global.botname = 'WatsonXd-Bot';
+global.author = '@watsonfourpence';
 global.version = '2.0.1';
 global.body = 'Simple WhatsApp Bot.';
 
